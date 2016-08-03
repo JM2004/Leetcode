@@ -1,0 +1,62 @@
+package the50Questions;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+public class LongestSubTwoDistinct {
+  public int lengthOfLongestSubstringTwoDistinct(String s) {
+    if(s == null || s.isEmpty())  return 0;
+    
+    HashMap<Character, Integer> charIndexMap = new HashMap<>();
+    int l = s.length(), curL = 0, maxSub = 0;
+    
+    for(int head = 0, preHead = 0; head < l; head ++) {
+      char cur = s.charAt(head);
+      
+      if (charIndexMap.size() < 2 || charIndexMap.keySet().contains(cur)) { 
+        charIndexMap.put(cur, head); 
+      
+      } else { 
+        char minKey = getTheLeastIndChar(charIndexMap, s.length()-1);
+        preHead = charIndexMap.get(minKey) + 1;
+        charIndexMap.remove(minKey);
+        charIndexMap.put(cur, head);
+      }
+      
+      maxSub = Math.max(maxSub, head - preHead + 1);
+    }
+    return maxSub;
+  }
+
+ public Character getTheLeastIndChar (HashMap<Character, Integer> map,int max) {
+     
+    int minIndex = max;
+    Character minKey = ' ';
+    for(Map.Entry<Character, Integer> cur: map.entrySet()){
+      minKey = cur.getValue() <= minIndex? cur.getKey():minKey;
+    }
+    return minKey;
+  }
+ 
+ public int lengthOfLongestSubstringTwoDistinctII(String s) {
+   int i = 0, j = -1, maxLen = 0;
+   for(int k =1; k < s.length(); k ++) {
+     
+     
+     
+   }
+   
+   
+ }
+ 
+ 
+ public static void main(String[] input) {
+  String x1 = "test";
+  String x2 = "abacc";
+  String x3 = "ccc";
+  String x4 = "";
+  LongestSubTwoDistinct ins= new LongestSubTwoDistinct();
+  System.out.println(ins.lengthOfLongestSubstringTwoDistinct(x4));
+   
+ }
